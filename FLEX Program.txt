@@ -1,0 +1,12 @@
+%{
+    int count = 0;
+%}
+%%
+[A-Z]{printf("%s capital letter\n,yytext);count++;}
+.*{printf("%s not a capital letter\n",yytext);}
+%%
+void main(){
+    yylex();
+    printf("\n Number of capital letters in the given input are - %d\n", count);
+}
+int yywrap(){}

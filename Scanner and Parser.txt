@@ -1,0 +1,25 @@
+%{
+    #include <stdio.h>
+%}
+DIGIT[0-9]
+ID[a-z A-Z][a-z A-Z 0-9]*
+%
+{DIGIT} + {printf("INT:%s\n".yytext);}
+{DIGIT} + "."{DIGIT} + {printf(FLOAT:%s\n".yytext);}
+{ID} {printf("ID:%s\n",yytext);}
+"+" {printf("PLUS\n);}
+"-" {printf("MINUS\n);}
+"*" {printf("MULTIPLY\n);}
+"/" {printf("DIVIDE\n);}
+"(" {printf("LPAREN\n);}
+")" {printf("RPAREN\n);}
+[lt\n];
+{printf("Invalid character: %s\n", yytext);}
+%%
+int yywrap(){
+    return 1;
+}
+int main(){
+    yylex();
+    return 0;
+}
